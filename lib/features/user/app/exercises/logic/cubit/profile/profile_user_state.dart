@@ -9,15 +9,36 @@ abstract class ProfileUserState extends Equatable {
 
 class ProfileUserInitial extends ProfileUserState {}
 
-class SignOutSuccessUserProfileState extends ProfileUserState {}
-
-class SignOutLoadingUserProfileState extends ProfileUserState {}
-
 class CheckFingerPrintState extends ProfileUserState {}
+
 class EnableFingerPrintState extends ProfileUserState {}
 
-class SignOutErrorUserProfileState extends ProfileUserState {
-  final String error;
+class FalseValueState extends ProfileUserState {}
 
-  const SignOutErrorUserProfileState(this.error);
+class TrueValueState extends ProfileUserState {}
+
+class LightThemeState extends ProfileUserState {}
+
+class DarkThemeState extends ProfileUserState {}
+
+class CurrentChangeTitleIndex extends ProfileUserState {}
+
+class NextChangeTitleIndex extends ProfileUserState {}
+
+class UpdateDateSuccess extends ProfileUserState {}
+
+class UpdateDateError extends ProfileUserState {}
+
+
+//
+// class UpdateUserDetailsSuccessState extends ProfileUserState {}
+// class UpdateUserDetailsLoadingState extends ProfileUserState {}
+// class UpdateUserDetailsErrorState extends ProfileUserState {}
+
+class GetUserLoadingStates extends ProfileUserState {}
+class GetUserSuccessStates extends ProfileUserState {}
+class GetUserErrorStates extends ProfileUserState {
+  final String e;
+const  GetUserErrorStates({ required this.e});
 }
+

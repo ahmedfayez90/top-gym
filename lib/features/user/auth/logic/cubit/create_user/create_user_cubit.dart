@@ -1,12 +1,5 @@
 import 'dart:developer';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:top_gym/core/utils/api_path.dart';
-import '../../../../../../core/services/database.dart';
-import '../../../../core/gools_data.dart';
-import '../../../presentation/model/user_data_model.dart';
+import '../../../../../../core/config/routes/app.dart';
 
 part 'create_user_state.dart';
 
@@ -25,6 +18,9 @@ class CreateUserCubit extends Cubit<CreateUserState> {
       final userAuth = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       UserData userData = UserData(
+        phoneNumber: userAuth.user!.phoneNumber ?? '',
+          name: userAuth.user!.displayName ?? '',
+          imageUrl: userAuth.user!.photoURL ?? '',
           uid: userAuth.user!.uid,
           email: email,
           age: GoalsDataUser.age,
@@ -36,17 +32,7 @@ class CreateUserCubit extends Cubit<CreateUserState> {
           feMale: GoalsDataUser.feMale,
           isUser: GoalsDataUser.isUser);
       await dataBase.setUserData(userData);
-      // print(await dataBase.checkIsUser(email, userAuth.user!.uid));
-      // final DocumentSnapshot userFound = await FirebaseFirestore.instance
-      //     .collection(ApiPath.user(userAuth.user!.uid))
-      //     .doc(userAuth.user!.uid)
-      //     .get();
-      // final _userF = userFound.get("User");
-      // print(_userF);
-      // print(
-      //     "**********************************************************************************");
-
-      emit(SuccessCreateUserState());
+      emit(SuccessCreateUserState(uId: userAuth.user!.uid));
       return userAuth.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sizer/sizer.dart';
 
-flutterToast({required String msg, required Color color}) {
+flutterToast({
+  required String msg,
+  required Color color,
+  Toast toastLength = Toast.LENGTH_SHORT,
+}) {
   return Fluttertoast.showToast(
     msg: msg,
-    toastLength: Toast.LENGTH_SHORT,
+    toastLength: toastLength,
     gravity: ToastGravity.TOP,
     timeInSecForIosWeb: 1,
     backgroundColor: color,

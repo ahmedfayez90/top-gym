@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
-import 'package:top_gym/core/utils/app_images.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
+
+import '../config/routes/app.dart';
 
 class ImageNetworkComponent extends StatelessWidget {
   const ImageNetworkComponent({Key? key, required this.image})
@@ -12,9 +12,12 @@ class ImageNetworkComponent extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(50.sp),
       child: Image.network(
-        fit: BoxFit.contain,
-
+        fit: BoxFit.fill,
         image ?? AppNetworkImage.noPhoto,
+        cacheHeight: 15.h.toInt(),
+        cacheWidth: 35.w.toInt(),
+        height: 12.h,
+        width: 28.w,
         frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
           if (wasSynchronouslyLoaded) return child;
           return AnimatedOpacity(
@@ -24,7 +27,6 @@ class ImageNetworkComponent extends StatelessWidget {
             child: child,
           );
         },
-
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress == null) return child;
           return Center(

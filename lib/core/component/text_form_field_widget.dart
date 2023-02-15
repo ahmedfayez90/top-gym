@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
-import '../../features/user/auth/logic/cubit/login_user/login_user_cubit.dart';
-import '../config/theme/app_color.dart';
+import '../config/routes/app.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget({
@@ -24,10 +20,11 @@ class TextFormFieldWidget extends StatelessWidget {
     this.suffixIcon,
     this.isSuffixOthers = false,
     this.autoValidateMode = false,
+    this.fillColor = Colors.black45,
   });
 
   final bool isSuffixOthers;
-
+  final Color fillColor;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final bool autofocus;
@@ -73,7 +70,7 @@ class TextFormFieldWidget extends StatelessWidget {
               cursorHeight: 2.5.h,
               obscuringCharacter: '*',
               decoration: InputDecoration(
-                fillColor: Colors.black45,
+                fillColor: fillColor,
                 hintText: hintText,
                 hintStyle: TextStyle(
                   color: Colors.white38,

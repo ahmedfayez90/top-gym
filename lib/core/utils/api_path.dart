@@ -1,4 +1,4 @@
-class ApiPath{
+class  ApiPath{
   static String user(String uid) => 'users/$uid';
   static String products = 'products';
   // static String products(String id) => 'cc/$id';

@@ -1,19 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
-import '../../../../../core/component/main_button.dart';
+import 'package:top_gym/core/config/routes/app.dart';
+import 'package:top_gym/core/helper/my_cache_keys.dart';
 import '../../../../../core/component/text_button_widget.dart';
-import '../../../../../core/component/text_form_field_widget.dart';
-import '../../../../../core/component/toast.dart';
-import '../../../../../core/config/routes/routes.dart';
-import '../../../../../core/config/theme/app_color.dart';
-import '../../../../../core/utils/app_images.dart';
-import '../../../../../core/utils/app_strings.dart';
-import '../../logic/cubit/login_user/login_user_cubit.dart';
 import '../widgets/social_auth_button.dart';
 
 class LogInUserScreen extends StatefulWidget {
-  LogInUserScreen({super.key});
+ const LogInUserScreen({super.key});
 
   @override
   State<LogInUserScreen> createState() => _LogInUserScreenState();
@@ -21,17 +12,20 @@ class LogInUserScreen extends StatefulWidget {
 
 class _LogInUserScreenState extends State<LogInUserScreen> {
   final TextEditingController passwordController = TextEditingController();
-
   final TextEditingController emailController = TextEditingController();
-
   final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
-@override
+
+
+
+  @override
   void initState() {
-   LoginUserCubit.get(context).checkFingerPrint();
+    // LoginUserCubit.get(context).checkFingerPrint();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
+    ProfileUserCubit profileCubit =  ProfileUserCubit.get(context);
     return Scaffold(
       backgroundColor: AppColor.backgroundColor,
       appBar: AppBar(
@@ -56,20 +50,28 @@ class _LogInUserScreenState extends State<LogInUserScreen> {
                 msg: 'Login in Failure',
                 color: AppColor.primaryColor,
               );
-            } else if (state is SuccessLoginUserState ||
-                state is SuccessLoginGoogleUserState) {
+            } else if (state is SuccessLoginUserState) {
+              CacheHelper.putString(key: MyCacheKeys.uId, value: state.uId).then((value) {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  Routes.layoutExercisesUserScreen,
+                      (route) => false,
+                );
+               profileCubit.getUserProfileData();
+              });
+
+            } else if( state is SuccessLoginGoogleUserState){
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 Routes.layoutExercisesUserScreen,
-                (route) => false,
+                    (route) => false,
               );
             }
           },
           buildWhen: (previous, current) {
-         return   previous != current;
+            return previous != current;
           },
           builder: (context, state) {
-            print("ahmed");
             LoginUserCubit cubit = LoginUserCubit.get(context);
             // cubit.checkFingerPrint();
             return Form(
@@ -174,14 +176,13 @@ class _LogInUserScreenState extends State<LogInUserScreen> {
                             text: AppStringsOfAuthUser.continueWithGoogle),
                       ),
                     SizedBox(height: 2.h),
-                    if(cubit.fPrint.isNotEmpty)
-                    MainButton(
-
-                      onPressed: () {
-                        cubit.loginWithFingerPrint();
-                      },
-                      text: "Login With FingerPrint",
-                    ),
+                    if (cubit.fPrint.isNotEmpty)
+                      MainButton(
+                        onPressed: () {
+                          cubit.loginWithFingerPrint();
+                        },
+                        text: "Login With FingerPrint",
+                      ),
                     Text(
                       AppStringsOfAuthUser.textPermission,
                       style: Theme.of(context)

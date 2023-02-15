@@ -23,14 +23,12 @@ class LandingScreen extends StatelessWidget {
                 return const TypeScreen();
               }
 
-
               if (user.phoneNumber == null) {
                 return LayoutExercisesUserScreen();
               }
-              if(user.phoneNumber != null){
+              if (user.phoneNumber != null) {
                 return const WelcomeScreen();
               }
-
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(

@@ -5,7 +5,7 @@ class CacheHelper {
   static SharedPreferences? preferences;
 
   static Future<void> init() async {
-    preferences = await SharedPreferences.getInstance();
+    preferences ?? await SharedPreferences.getInstance();
   }
 
   static Future<bool?> putString(
@@ -59,5 +59,9 @@ class CacheHelper {
 
   static Future<void> clearShared() async {
     await preferences?.clear();
+  }
+
+  static bool containsKey(MyCacheKeys key) {
+    return preferences!.containsKey(key.name);
   }
 }

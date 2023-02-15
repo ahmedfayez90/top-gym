@@ -1,27 +1,15 @@
 import 'package:top_gym/features/admin/app/uploaded/logic/upload_product/upload_cubit.dart';
-import 'package:top_gym/features/admin/auth/presentation/screens/auth_admin.dart';
-
-import '../../../features/admin/app/calender_users/presentation/screens/beginner.dart';
-import '../../../features/admin/app/calender_users/presentation/screens/inavtive.dart';
-import '../../../features/admin/app/calender_users/presentation/screens/splash_screen.dart';
-import '../../../features/admin/app/calender_users/presentation/screens/type_screen.dart';
+import 'package:top_gym/features/user/app/exercises/presentation/screens/profile_user_data_screen.dart';
 import '../../../features/admin/auth/logic/cubit/login_admin/login_admin_cubit.dart';
 import 'app.dart';
 
 class AppRoutes {
-  static ProfileUserCubit? profileUserCubit;
-
-  AppRoutes() {
-    profileUserCubit = ProfileUserCubit();
-  }
-
   static Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.splashScreen:
         return MaterialPageRoute(
           builder: (c) => const SplashScreen(),
         );
-
       case Routes.phoneAuthPage:
         return MaterialPageRoute(
           builder: (c) => RepositoryProvider(
@@ -35,14 +23,9 @@ class AppRoutes {
             ),
           ),
         );
-      //
-      // case Routes.adminsScreen:
-      //   return MaterialPageRoute(
-      //     builder: (c) => AdminsScreen(),
-      //   );
       case Routes.authAdmin:
         return MaterialPageRoute(
-          builder: (c) =>  AuthAdmin(),
+          builder: (c) => AuthAdmin(),
         );
       case Routes.otpScreen:
         final phoneNumber = routeSettings.arguments;
@@ -52,7 +35,6 @@ class AppRoutes {
             child: OtpScreen(phoneNumber: phoneNumber),
           ),
         );
-
       case Routes.welcomeScreen:
         return MaterialPageRoute(
           builder: (c) => const WelcomeScreen(),
@@ -64,7 +46,6 @@ class AppRoutes {
             child: UploadScreen(),
           ),
         );
-
       case Routes.beginnerScreen:
         return MaterialPageRoute(
           builder: (c) => const Beginner(),
@@ -105,26 +86,25 @@ class AppRoutes {
 
       //////////////////////////////////////////////////////////////////
       // app User
-      // case Routes.mainScreen:
-      //   return MaterialPageRoute(
-      //     builder: (c) => const MainScreen(),
-      //   );
-
       case Routes.layoutExercisesUserScreen:
         return MaterialPageRoute(
-          builder: (c) => MultiBlocProvider(
-            providers: [
-              BlocProvider(create: (ctx) => profileUserCubit!),
-            ],
-            child: LayoutExercisesUserScreen(),
-          ),
+          builder: (c) => LayoutExercisesUserScreen(),
+        );
+      case Routes.profileUserDataScreen:
+        return MaterialPageRoute(
+          builder: (c) =>  ProfileUSerDataScreen(),
         );
 
       case Routes.landingScreen:
       default:
         return MaterialPageRoute(
-          builder: (c) => BlocProvider<ProfileUserCubit>.value(
-              value: profileUserCubit!, child: const LandingScreen()),
+          builder: (c) =>
+              // BlocProvider<ProfileUserCubit>.value(
+              //   value: profileUserCubit!,
+              //   child:
+
+              const LandingScreen(),
+          // ),
         );
     }
   }

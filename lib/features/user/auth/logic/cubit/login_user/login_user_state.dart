@@ -45,8 +45,10 @@ class LoadingLoginUserState extends LoginUserState {
 }
 
 class SuccessLoginUserState extends LoginUserState {
+  final String uId;
+ const SuccessLoginUserState({required this.uId});
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [uId];
 }
 
 class ErrorLoginUserState extends LoginUserState {

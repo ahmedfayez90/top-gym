@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColor {
   static const primaryColor = Color(0xFF40D876);
+
+
   static const backgroundColor = Color(0xFF131429);
   static const scoundColor = Color.fromARGB(255, 15, 84, 157);
   static const thredColor = Color(0xFF232441);
@@ -17,6 +19,8 @@ class AppColor {
   static Color textColor = const Color(0xFFd0d2d2);
   static Color profileBackgroundColor = const Color(0xFFF3F3F3);
   static Color profileItemColor = const Color(0xFFFFFFFF);
-
+//////////////////////////////////Dark Mode//////////////////////////////////////////////////
+  static const darkBackgroundColor = Colors.white;
+  static const darkPrimaryColor = Color(0xFF5d88fd);
 
 }

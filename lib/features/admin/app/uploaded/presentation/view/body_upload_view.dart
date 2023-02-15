@@ -48,7 +48,6 @@ class BodyUploadView extends StatelessWidget {
               onChanged: (val) {}),
           TextFormFieldWidget(
               controller: UploadProductController.category,
-
               text: "Category",
               validator: validationPrice,
               onChanged: (val) {}),

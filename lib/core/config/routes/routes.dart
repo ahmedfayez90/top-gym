@@ -17,6 +17,7 @@ class Routes {
 // User App
 //   static const mainScreen = "MainScreen";
   static const layoutExercisesUserScreen = "LayoutExercisesUserScreen";
+  static const profileUserDataScreen = "ProfileUserDataScreen";
 
 // Admin Screens Auth
   static const adminsScreen = "AdminsScreen";

@@ -9,5 +9,15 @@
   "something_went_wrong": "حدث خطأ ما",
   "reload_screen": "إعادة تحميل الصفحة",
   "want_to_logout": "هل تريد تسجيل الخروج؟",
-  "logout": "تسجيل خروج"
+  "logout": "تسجيل خروج",
+  "profile_screen": "شاشة الشخصية ",
+  "arabic": "العربيه",
+  "dark_mode": "الوضع الداكن ",
+  "general": "عام",
+  "workouts": "اكتشف",
+  "custom": "مخصص",
+  "exercises" : "التماريين",
+  "favorite": "المفضلة",
+  "me": "أنا",
+  "sign_out" : "الخروج "
 }

@@ -57,7 +57,7 @@ class LoginUserCubit extends Cubit<LoginUserState> {
       );
         storage.write(key: Keys.userName, value: email);
        storage.write(key: Keys.password , value: password) ;
-      emit(SuccessLoginUserState());
+      emit(SuccessLoginUserState(uId: userAuth.user!.uid));
       return userAuth.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

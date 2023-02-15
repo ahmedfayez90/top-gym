@@ -1,6 +1,4 @@
-import 'package:top_gym/features/user/auth/logic/cubit/login_user/login_user_cubit.dart';
 import '../../../../../../../core/config/routes/app.dart';
-import '../../../../logic/cubit/create_user/create_user_cubit.dart';
 
 class CreateAccount extends StatelessWidget {
   CreateAccount({Key? key}) : super(key: key);
@@ -10,6 +8,7 @@ class CreateAccount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProfileUserCubit profileCubit = ProfileUserCubit.get(context);
     return Form(
       key: stepCreateKeyKey,
       child: Column(
@@ -19,7 +18,7 @@ class CreateAccount extends StatelessWidget {
             AppStringsOfSixPage.almost,
             style: Theme.of(context)
                 .textTheme
-                .headline1!
+                .displayLarge!
                 .copyWith(fontSize: 11.5.sp),
           ),
           TextFormFieldWidget(
@@ -69,58 +68,67 @@ class CreateAccount extends StatelessWidget {
             ),
           ),
           SizedBox(height: 2.h),
-          BlocConsumer<CreateUserCubit, CreateUserState>(
-            listener: (ctx, state) {
-              if (state is ErrorCreateWeakPasswordState) {
-                flutterToast(
-                  msg: 'The password provided is too weak.',
-                  color: AppColor.primaryColor,
-                );
-              } else if (state is ErrorCreateEmailAlreadyInUseState) {
-                flutterToast(
-                  msg: 'The account already exists for that email.',
-                  color: AppColor.primaryColor,
-                );
-              } else if (state is ErrorCreateUserState) {
-                flutterToast(
-                  msg: 'Register in Failure',
-                  color: AppColor.primaryColor,
-                );
-              } else if (state is SuccessCreateUserState) {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  Routes.layoutExercisesUserScreen,
-                  (route) => false,
-                );
-              }
-            },
-            builder: (ctx, state) {
-              CreateUserCubit cubitCreateUser = CreateUserCubit.get(ctx);
-              return Column(
-                children: [
-                  if (state is LoadingCreateUserState)
-                    const Center(
-                      child: CircularProgressIndicator(
-                        color: AppColor.primaryColor,
-                      ),
-                    ),
-                  if (state is! LoadingCreateUserState)
-                    MainButton(
-                      borderRadius: 50,
-                      onPressed: () async {
-                        if (stepCreateKeyKey.currentState!.validate()) {
-                          await cubitCreateUser.signUpWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
-                        }
-                      },
-                      text: AppStrings.next,
-                    )
-                ],
+        BlocConsumer<CreateUserCubit, CreateUserState>(
+          listener: (ctx, state) {
+            if (state is ErrorCreateWeakPasswordState) {
+              flutterToast(
+                msg: 'The password provided is too weak.',
+                color: AppColor.primaryColor,
               );
-            },
-          ),
+            } else if (state is ErrorCreateEmailAlreadyInUseState) {
+              flutterToast(
+                msg: 'The account already exists for that email.',
+                color: AppColor.primaryColor,
+              );
+            } else if (state is ErrorCreateUserState) {
+              flutterToast(
+                msg: 'Register in Failure',
+                color: AppColor.primaryColor,
+              );
+            } else if (state is SuccessCreateUserState) {
+              CacheHelper.putString(key: MyCacheKeys.uId, value: state.uId)
+                  .then((value) {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.layoutExercisesUserScreen,
+                    (route) => false,
+              );
+                profileCubit.getUserProfileData();
+              });
+            }
+          },
+          builder: (ctx, state) {
+            CreateUserCubit cubitCreateUser = CreateUserCubit.get(ctx);
+            return Column(
+              children: [
+                if (state is LoadingCreateUserState)
+                  const Center(
+                    child: CircularProgressIndicator(
+                      color: AppColor.primaryColor,
+                    ),
+                  ),
+                if (state is! LoadingCreateUserState)
+                  MainButton(
+                    borderRadius: 50,
+                    onPressed: () async {
+                      if (stepCreateKeyKey.currentState!.validate()) {
+                        await cubitCreateUser.signUpWithEmailAndPassword(
+                          email: emailController.text,
+                          password:  passwordController.text,
+                        );
+                      }
+                    },
+                    text: AppStrings.next,
+                  )
+              ],
+            );
+          },
+        ),
+          // CreateAccountButton(
+          //   stepCreateKeyKey: stepCreateKeyKey,
+          //   email: emailController.text,
+          //   password: passwordController.text,
+          // ),
           SizedBox(height: 1.h),
         ],
       ),

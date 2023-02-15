@@ -9,5 +9,15 @@
   "something_went_wrong": "Something Went Wrong",
   "reload_screen": "Reload Screen",
   "want_to_logout": "Do you want to logout ?",
-  "logout": "Logout"
+  "logout": "Logout",
+  "profile_screen":"Profile Screen",
+  "arabic": "Arabic",
+  "dark_mode" :"Dark Mode",
+  "general": "GENERAL",
+  "workouts": "Workouts",
+  "custom": "Custom",
+  "exercises" : "Exercises",
+  "favorite": "Favorite",
+  "me": "Me",
+  "sign_out": "signOut"
 }

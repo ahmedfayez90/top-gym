@@ -2,7 +2,10 @@ import '../config/routes/app.dart';
 
 abstract class DataBase {
   Future<void> setUserData(UserData userData);
+
   Stream<List<ProductModel>> newProductStream();
+
+  // Stream<UserData> getUserData();
 }
 
 class FireStoreDatabase implements DataBase {
@@ -17,6 +20,12 @@ class FireStoreDatabase implements DataBase {
   @override
   Stream<List<ProductModel>> newProductStream() => _service.collectionsStream(
         path: ApiPath.products,
-        builder: (data, documentId) => ProductModel.fromMap(data!,documentId),
+        builder: (data, documentId) => ProductModel.fromMap(data!, documentId),
       );
+  //
+  // @override
+  // Stream<UserData> getUserData() => _service.documentsStream(
+  //       path: path,
+  //       builder: builder,
+  //     );
 }

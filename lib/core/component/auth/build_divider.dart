@@ -1,8 +1,6 @@
 
-import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
-import '../../config/theme/app_color.dart';
+import '../../config/routes/app.dart';
 
 class BuildDivider extends StatelessWidget {
   const BuildDivider({Key? key}) : super(key: key);

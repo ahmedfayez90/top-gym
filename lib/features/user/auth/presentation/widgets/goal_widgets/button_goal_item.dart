@@ -21,7 +21,6 @@ class ButtonGoalItem extends StatelessWidget {
     return Padding(
       padding:  EdgeInsets.only(bottom: 1.h),
       child: MainButton(
-
         borderRadius: borderRadius,
         isTextCenter: false,
         colorButton: AppColor.backgroundColor,

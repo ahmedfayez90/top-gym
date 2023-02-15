@@ -17,6 +17,17 @@ class AppStrings {
   static const String englishCode = 'en';
   static const String arabicCode = 'ar';
   static const String local = 'local';
+  // ************ Profile Screen  ***********************************************************************************
+  static const String langKey= 'arabic';
+  static const String darkMode= 'dark_mode';
+  static const String general= 'general';
+  static const String workout= 'workouts';
+  static const String custom= 'custom';
+  static const String exercises= 'exercises';
+  static const String favorite= 'favorite';
+  static const String me = 'me';
+  static const String signOut = 'sign_out';
+
 }
 
 class AppStringsOfAuthUser {
